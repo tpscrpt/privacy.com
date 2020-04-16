@@ -1,6 +1,6 @@
 {
     "name": "privacy.com",
-    "version": "1.0.0",
+    "version": "0.2.0",
     "description": "Wrapper for the Privacy.com API using Axios and TypeScript",
     "keywords": [
         "privacy.com",
@@ -37,9 +37,8 @@
         "type": "git",
         "url": "https://github.com/jeremigendron/privacy.com"
     },
-    "main": "dist/index",
-    "module": "dist/index",
-    "types": "dist/index",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "dependencies": {
         "axios": "^0.19.2"
     },
