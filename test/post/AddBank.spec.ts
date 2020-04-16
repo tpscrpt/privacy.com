@@ -15,7 +15,7 @@ describe("AddBank basic", () => {
             routing_number: "123454321",
             account_number: "0123454321",
         };
-        response = await privacyApiFixture.addBank(params)
+        response = await privacyApiFixture.addBank(params);
     });
 
     it("should return an appropriate response containing a valid FundingAccount type object", () => {

@@ -14,7 +14,7 @@ describe("CreateCard basic", () => {
         const params: CreateCardParams = {
             type: "UNLOCKED",
         };
-        response = await privacyApiFixture.createCard(params)
+        response = await privacyApiFixture.createCard(params);
     });
 
     it("should return an appropriate response containing a valid Card type object", () => {

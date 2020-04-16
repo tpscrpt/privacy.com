@@ -3,11 +3,7 @@ import "mocha";
 import { expect } from "chai";
 import { before } from "mocha";
 
-import {
-    SimulateAuthorizationParams,
-    SimulateAuthorizationResponse,
-    TokenData
-} from "../../../src";
+import { SimulateAuthorizationParams, SimulateAuthorizationResponse, TokenData } from "../../../src";
 import { privacyApiFixture } from "../../fixtures/privacyApi";
 import { privacyCardFixture } from "../../fixtures/card";
 
@@ -20,7 +16,7 @@ describe("SimulateAuthorization basic", () => {
             pan: privacyCardFixture.pan,
             amount: 100,
         };
-        response = await privacyApiFixture.simulateAuthorization(params)
+        response = await privacyApiFixture.simulateAuthorization(params);
     });
 
     it("should return an appropriate response containing a valid TokenResponse type object", () => {

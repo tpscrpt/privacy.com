@@ -11,7 +11,7 @@ describe("ListCards basic", () => {
     let response: ListCardsResponse;
 
     before("Execute Request", async () => {
-        response = await privacyApiFixture.listCards()
+        response = await privacyApiFixture.listCards();
     });
 
     it("should list at least 1 page", () => {

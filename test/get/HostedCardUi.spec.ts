@@ -18,7 +18,7 @@ describe("HostedCardUi valid", () => {
                 css: cssUrl,
                 token: privacyCardFixture.token,
             },
-        })
+        });
     });
 
     it("should return a response with valid card details", () => {

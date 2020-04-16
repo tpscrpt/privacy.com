@@ -116,8 +116,8 @@ class PrivacyApi {
     }
 
     /**
-    * Create a new card for the privacy account
-    */
+     * Create a new card for the privacy account
+     */
     public createCard(params: CreateCardParams): Promise<CreateCardResponse> {
         return this.execute(new CreateCardRequest(params));
     }
@@ -144,8 +144,8 @@ class PrivacyApi {
     }
 
     /**
-    * List transactions associated with the privacy account or a specific card
-    */
+     * List transactions associated with the privacy account or a specific card
+     */
     public listTransactions(params?: ListTransactionsParams): Promise<ListTransactionsResponse> {
         return this.execute(new ListTransactionsRequest(params));
     }

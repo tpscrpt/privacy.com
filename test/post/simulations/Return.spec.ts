@@ -3,11 +3,7 @@ import "mocha";
 import { expect } from "chai";
 import { before } from "mocha";
 
-import {
-    SimulateReturnParams,
-    SimulateReturnResponse,
-    TokenData
-} from "../../../src";
+import { SimulateReturnParams, SimulateReturnResponse, TokenData } from "../../../src";
 import { privacyApiFixture } from "../../fixtures/privacyApi";
 import { privacyCardFixture } from "../../fixtures/card";
 
@@ -20,7 +16,7 @@ describe("SimulateReturn basic", () => {
             pan: privacyCardFixture.pan,
             amount: 100,
         };
-        response = await privacyApiFixture.simulateReturn(params)
+        response = await privacyApiFixture.simulateReturn(params);
     });
 
     it("should return an appropriate response containing a valid TokenResponse type object", () => {

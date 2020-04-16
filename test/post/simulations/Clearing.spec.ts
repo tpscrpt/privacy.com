@@ -3,12 +3,8 @@ import "mocha";
 import { expect } from "chai";
 import { before } from "mocha";
 
-import {
-    SimulateAuthorizationParams,
-} from "../../../src/endpoints/post/simulations/Authorization";
-import {
-    SimulateClearingParams, SimulateClearingResponse,
-} from "../../../src/endpoints/post/simulations/Clearing";
+import { SimulateAuthorizationParams } from "../../../src/endpoints/post/simulations/Authorization";
+import { SimulateClearingParams, SimulateClearingResponse } from "../../../src/endpoints/post/simulations/Clearing";
 import { privacyApiFixture } from "../../fixtures/privacyApi";
 import { privacyCardFixture } from "../../fixtures/card";
 
@@ -22,14 +18,14 @@ describe("SimulateClearing basic", () => {
             pan: privacyCardFixture.pan,
             amount: 100,
         };
-        token = (await privacyApiFixture.simulateAuthorization(simulateAuthorizationParams)).data.token
+        token = (await privacyApiFixture.simulateAuthorization(simulateAuthorizationParams)).data.token;
 
         const params: SimulateClearingParams = {
             token,
             amount: 50,
         };
 
-        response = await privacyApiFixture.simulateClearing(params)
+        response = await privacyApiFixture.simulateClearing(params);
     });
 
     it("should return an appropriate response containing an empty object", () => {

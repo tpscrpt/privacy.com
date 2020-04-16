@@ -11,7 +11,7 @@ describe("ListFundingAccounts basic", () => {
     let response: ListFundingAccountsResponse;
 
     before("Execute Request", async () => {
-        response = await privacyApiFixture.listFundingAccounts()
+        response = await privacyApiFixture.listFundingAccounts();
     });
 
     it("should return an array of results with at least 1 member which matches FundingAccount type", () => {

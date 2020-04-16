@@ -3,9 +3,7 @@ import "mocha";
 import { expect } from "chai";
 import { before } from "mocha";
 
-import {
-    SimulateAuthorizationParams,
-} from "../../../src/endpoints/post/simulations/Authorization";
+import { SimulateAuthorizationParams } from "../../../src/endpoints/post/simulations/Authorization";
 import { SimulateVoidParams, SimulateVoidResponse } from "../../../src/endpoints/post/simulations/Void";
 import { privacyApiFixture } from "../../fixtures/privacyApi";
 import { privacyCardFixture } from "../../fixtures/card";
@@ -20,14 +18,14 @@ describe("SimulateVoid basic", () => {
             pan: privacyCardFixture.pan,
             amount: 100,
         };
-        token = await (await privacyApiFixture.simulateAuthorization(simulateAuthorizationParams)).data.token
+        token = await (await privacyApiFixture.simulateAuthorization(simulateAuthorizationParams)).data.token;
 
         const params: SimulateVoidParams = {
             token,
             amount: 50,
         };
 
-        response = await privacyApiFixture.simulateVoid(params)
+        response = await privacyApiFixture.simulateVoid(params);
     });
 
     it("should return an appropriate response containing an empty object", () => {

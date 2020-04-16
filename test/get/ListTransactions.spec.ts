@@ -11,7 +11,7 @@ describe("ListTransactions basic", () => {
     let response: ListTransactionsResponse;
 
     before("Execute Request", async () => {
-        response = await privacyApiFixture.listTransactions()
+        response = await privacyApiFixture.listTransactions();
     });
 
     it("should list at least 1 page", () => {
