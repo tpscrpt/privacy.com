@@ -1,6 +1,6 @@
-import { PrivacyMerchant } from "../../src/objects";
+import { Merchant } from "../../src/objects";
 
-export const privacyMerchant: PrivacyMerchant = {
+export const privacyMerchant: Merchant = {
     acceptor_id: "",
     city: "",
     country: "",

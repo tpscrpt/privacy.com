@@ -1,23 +1,24 @@
-import { PrivacyFundingAccount } from "../../objects";
-import { PrivacyPostEndpoint } from ".";
+import { Response } from "..";
+import { FundingAccount } from "../../objects";
+import { PostEndpoint } from ".";
 
 /**
  * Adds a bank account as a funding source using routing and account numbers. Returns a FundingAccount object containing the bank information.
  */
-export class PrivacyAddBankRequest extends PrivacyPostEndpoint<PrivacyAddBankResponse> {
+export class AddBankRequest extends PostEndpoint {
     path: string = "/fundingsource/bank";
-    params: PrivacyAddBankParams;
+    params: AddBankParams;
 
-    constructor(params: PrivacyAddBankParams) {
+    constructor(params: AddBankParams) {
         super();
         this.params = params;
     }
 }
 
 /**
- * Parameters for {@link PrivacyAddBankRequest}
+ * Parameters for {@link AddBankRequest}
  */
-export type PrivacyAddBankParams = {
+export type AddBankParams = {
     /** The routing number of the bank account */
     routing_number: string;
     /** The account number of the bank account */
@@ -26,6 +27,6 @@ export type PrivacyAddBankParams = {
     account_name?: string;
 };
 
-export type PrivacyAddBankResponse = {
-    data: PrivacyFundingAccount;
-};
+export type AddBankResponse = Response<{
+    data: FundingAccount;
+}>;

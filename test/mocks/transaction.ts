@@ -1,9 +1,9 @@
-import { PrivacyTransaction } from "../../src/objects";
+import { Transaction } from "../../src/objects";
 import { privacyCard } from "./card";
 import { privacyEvent } from "./event";
 import { privacyMerchant } from "./merchant";
 
-export const privacyTransaction: PrivacyTransaction = {
+export const privacyTransaction: Transaction = {
     amount: 0,
     card: privacyCard,
     created: "",

@@ -1,4 +1,4 @@
-export type PrivacyMerchant = {
+export type Merchant = {
     /** Unique identifier to identify the payment card acceptor */
     acceptor_id: string;
     /** City of card acceptor */

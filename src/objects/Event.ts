@@ -1,19 +1,19 @@
-import { PrivacyTransactionResult } from "./Transaction";
+import { TransactionResult } from "./Transaction";
 
-export type PrivacyEvent = {
+export type Event = {
     /** Amount of the transaction event */
     amount: number;
     /** Date and time this event entered the system */
     created: string;
     /** APPROVED or decline reason. See below for full enumeration */
-    result: PrivacyTransactionResult;
+    result: TransactionResult;
     /** Globally unique identifier */
     token: string;
     /** AUTHORIZATION, AUTHORIZATION_ADVICE, CLEARING, VOID, RETURN */
-    type: PrivacyEventType;
+    type: EventType;
 };
 
-export type PrivacyEventType =
+export type EventType =
     /** The API sends an event for all approvals */
     | "AUTHORIZATION"
     /** Transaction was declined by the network (available for accounts with Issuing enabled) */

@@ -1,40 +1,35 @@
 import "mocha";
 
-import { AxiosResponse } from "axios";
 import { expect } from "chai";
 import { before } from "mocha";
 
 import {
-    PrivacySimulateAuthorizationParams,
-    PrivacySimulateAuthorizationRequest,
+    SimulateAuthorizationParams,
 } from "../../../src/endpoints/post/simulations/Authorization";
 import {
-    PrivacySimulateClearingParams,
-    PrivacySimulateClearingRequest,
+    SimulateClearingParams, SimulateClearingResponse,
 } from "../../../src/endpoints/post/simulations/Clearing";
-import { privacyApiFixture } from "../../fixtures/apiManager";
+import { privacyApiFixture } from "../../fixtures/privacyApi";
 import { privacyCardFixture } from "../../fixtures/card";
 
 describe("SimulateClearing basic", () => {
     let token: string;
-    let response: AxiosResponse;
+    let response: SimulateClearingResponse;
 
     before("Execute Request", async () => {
-        const simulateAuthorizationParams: PrivacySimulateAuthorizationParams = {
+        const simulateAuthorizationParams: SimulateAuthorizationParams = {
             descriptor: "merchant descriptor",
             pan: privacyCardFixture.pan,
             amount: 100,
         };
-        const simulateAuthorizationRequest = new PrivacySimulateAuthorizationRequest(simulateAuthorizationParams);
-        token = (await simulateAuthorizationRequest.execute(privacyApiFixture)).data.token;
+        token = (await privacyApiFixture.simulateAuthorization(simulateAuthorizationParams)).data.token
 
-        const params: PrivacySimulateClearingParams = {
+        const params: SimulateClearingParams = {
             token,
             amount: 50,
         };
 
-        const request = new PrivacySimulateClearingRequest(params);
-        response = await request.execute(privacyApiFixture);
+        response = await privacyApiFixture.simulateClearing(params)
     });
 
     it("should return an appropriate response containing an empty object", () => {

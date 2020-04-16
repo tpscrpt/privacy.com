@@ -1,6 +1,6 @@
-import { PrivacyCard } from "../../src/objects";
+import { Card } from "../../src/objects";
 
-export const privacyCardFixture: PrivacyCard = {
+export const privacyCardFixture: Card = {
     created: "2020-04-12T23:31:55Z",
     cvv: "424",
     exp_month: "04",

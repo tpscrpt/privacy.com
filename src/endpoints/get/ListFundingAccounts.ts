@@ -1,18 +1,19 @@
-import { PrivacyFundingAccount } from "../../objects";
-import { PrivacyGetEndpoint } from ".";
+import { Response } from "..";
+import { FundingAccount } from "../../objects";
+import { GetEndpoint } from ".";
 
-const _defaultParams: PrivacyListFundingAccountsParams = {
+const _defaultParams: ListFundingAccountsParams = {
     filter: "NONE",
 };
 
 /**
- * List all the funding accounts associated with the Privacy account
+ * List all the funding accounts associated with the privacy account
  */
-export class PrivacyListFundingAccountsRequest extends PrivacyGetEndpoint<PrivacyListFundingAccountsResponse> {
+export class ListFundingAccountsRequest extends GetEndpoint {
     path: string = "/fundingsource";
     params = {};
 
-    constructor(params: PrivacyListFundingAccountsParams = _defaultParams) {
+    constructor(params: ListFundingAccountsParams = _defaultParams) {
         super();
         if (params.filter === "BANK") this.path += "/bank";
         else if (params.filter === "CARD") this.path += "/card";
@@ -20,10 +21,10 @@ export class PrivacyListFundingAccountsRequest extends PrivacyGetEndpoint<Privac
 }
 
 /**
- * Parameters for {@link PrivacyListFundingAccountsRequest}
+ * Parameters for {@link ListFundingAccountsRequest}
  * @defaultValue { filter: "NONE" }
  */
-export type PrivacyListFundingAccountsParams = {
+export type ListFundingAccountsParams = {
     filter: /** List both bank and card funding accounts */
     | "NONE"
         /** List bank funding accounts */
@@ -32,4 +33,4 @@ export type PrivacyListFundingAccountsParams = {
         | "CARD";
 };
 
-export type PrivacyListFundingAccountsResponse = PrivacyFundingAccount[];
+export type ListFundingAccountsResponse = Response<FundingAccount[]>;

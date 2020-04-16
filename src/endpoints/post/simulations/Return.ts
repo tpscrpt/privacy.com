@@ -1,24 +1,25 @@
-import { PrivacyTokenResponse } from "..";
-import { PrivacyPostEndpoint } from "../";
+import { TokenData } from "..";
+import { PostEndpoint } from "../";
+import { Response } from "../..";
 
 /**
  * Returns (aka refunds) an amount back to a card. Returns are cleared immediately and do not spend time in a "pending" state.
  * @remarks Refund — value is pushed onto card
  */
-export class PrivacySimulateReturnRequest extends PrivacyPostEndpoint<PrivacySimulateReturnResponse> {
+export class SimulateReturnRequest extends PostEndpoint {
     path: string = "/simulate/return";
-    params: PrivacySimulateReturnParams;
+    params: SimulateReturnParams;
 
-    constructor(params: PrivacySimulateReturnParams) {
+    constructor(params: SimulateReturnParams) {
         super();
         this.params = params;
     }
 }
 
 /**
- * Parameters for {@link PrivacySimulateReturnRequest}
+ * Parameters for {@link SimulateReturnRequest}
  */
-export type PrivacySimulateReturnParams = {
+export type SimulateReturnParams = {
     /** Merchant descriptor */
     descriptor: string;
     /** 16 digit card number */
@@ -27,4 +28,4 @@ export type PrivacySimulateReturnParams = {
     amount: number;
 };
 
-export type PrivacySimulateReturnResponse = PrivacyTokenResponse;
+export type SimulateReturnResponse = Response<TokenData>;

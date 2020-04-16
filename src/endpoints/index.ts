@@ -1,8 +1,8 @@
 import { AxiosResponse } from "axios";
 
-import { PrivacyApiManager } from "..";
+import { PrivacyApi } from "..";
 
-export abstract class PrivacyEndpoint<ResponseT> {
+export abstract class Endpoint {
     /** HTTP method used in the request */
     method: string;
     /** Path of the request, appended to the baseUrl */
@@ -10,15 +10,7 @@ export abstract class PrivacyEndpoint<ResponseT> {
     /** Parameters serialized with the request */
     params: object;
 
-    /**
-     * Call this function to send an http request to the Privacy API and receive a response
-     * @param manager Instance of {@link PrivacyApiManager} with which to execute the request
-     */
-    public async execute(manager: PrivacyApiManager): PrivacyResponse<ResponseT> {
-        return manager.execute(this);
-    }
-
-    public beforeExecute?(manager: PrivacyApiManager): void;
+    public beforeExecute?(manager: PrivacyApi): void;
 }
 
-export type PrivacyResponse<T> = Promise<AxiosResponse<T>>;
+export type Response<T> = AxiosResponse<T>;

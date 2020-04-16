@@ -3,30 +3,28 @@ import "mocha";
 import { expect } from "chai";
 import { before } from "mocha";
 
-import { PrivacyTokenResponse } from "../../../src/endpoints/post";
 import {
-    PrivacySimulateReturnParams,
-    PrivacySimulateReturnRequest,
-    PrivacySimulateReturnResponse,
-} from "../../../src/endpoints/post/simulations/Return";
-import { privacyApiFixture } from "../../fixtures/apiManager";
+    SimulateReturnParams,
+    SimulateReturnResponse,
+    TokenData
+} from "../../../src";
+import { privacyApiFixture } from "../../fixtures/privacyApi";
 import { privacyCardFixture } from "../../fixtures/card";
 
 describe("SimulateReturn basic", () => {
-    let response: PrivacySimulateReturnResponse;
+    let response: SimulateReturnResponse;
 
     before("Execute Request", async () => {
-        const params: PrivacySimulateReturnParams = {
+        const params: SimulateReturnParams = {
             descriptor: "merchant descriptor",
             pan: privacyCardFixture.pan,
             amount: 100,
         };
-        const request = new PrivacySimulateReturnRequest(params);
-        response = (await request.execute(privacyApiFixture)).data;
+        response = await privacyApiFixture.simulateReturn(params)
     });
 
-    it("should return an appropriate response containing a valid PrivacyTokenResponse type object", () => {
-        const tokenData: PrivacyTokenResponse = response;
+    it("should return an appropriate response containing a valid TokenResponse type object", () => {
+        const tokenData: TokenData = response.data;
 
         expect(typeof tokenData.token).to.equal("string");
         // v4 uuid has 36 length

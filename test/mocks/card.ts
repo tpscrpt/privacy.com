@@ -1,7 +1,7 @@
-import { PrivacyCard } from "../../src/objects";
+import { Card } from "../../src/objects";
 import { privacyFundingAccount } from "./fundingAccount";
 
-const privacyCard: PrivacyCard = {
+const privacyCard: Card = {
     created: "",
     cvv: "",
     funding: privacyFundingAccount,

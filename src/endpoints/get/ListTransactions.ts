@@ -1,18 +1,18 @@
-import { PrivacyTransaction } from "../../objects";
-import { PrivacyGetEndpoint, PrivacyGetRequestPaginatedResponse } from ".";
+import { Transaction } from "../../objects";
+import { GetEndpoint, GetRequestPaginatedResponse } from ".";
 
-const _defaultParams: PrivacyListTransactionsParams = {
+const _defaultParams: ListTransactionsParams = {
     approval_status: "ALL",
 };
 
 /**
- * List cards associated with the Privacy account or a specific card
+ * List transactions associated with the privacy account or a specific card
  */
-export class PrivacyListTransactionsRequest extends PrivacyGetEndpoint<PrivacyListTransactionsResponse> {
+export class ListTransactionsRequest extends GetEndpoint {
     path: string = "/transaction";
-    params: PrivacyListTransactionsParams;
+    params: ListTransactionsParams;
 
-    constructor(params: PrivacyListTransactionsParams = _defaultParams) {
+    constructor(params: ListTransactionsParams = _defaultParams) {
         super();
         this.params = params;
         switch (this.params.approval_status) {
@@ -31,10 +31,10 @@ export class PrivacyListTransactionsRequest extends PrivacyGetEndpoint<PrivacyLi
 }
 
 /**
- * Parameters for {@link PrivacyListTransactionsRequest}
+ * Parameters for {@link ListTransactionsRequest}
  * @defaultValue { approval_status: "ALL" }
  */
-export type PrivacyListTransactionsParams = {
+export type ListTransactionsParams = {
     approval_status: /** List all transactions */
     | "ALL"
         /** List approved transactions */
@@ -55,4 +55,4 @@ export type PrivacyListTransactionsParams = {
     transaction_token?: string;
 };
 
-export type PrivacyListTransactionsResponse = PrivacyGetRequestPaginatedResponse<PrivacyTransaction>;
+export type ListTransactionsResponse = GetRequestPaginatedResponse<Transaction>;

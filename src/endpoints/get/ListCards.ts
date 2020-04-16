@@ -1,26 +1,26 @@
-import { PrivacyCard } from "../../objects";
-import { PrivacyGetEndpoint, PrivacyGetRequestPaginatedResponse } from ".";
+import { Card } from "../../objects";
+import { GetEndpoint, GetRequestPaginatedResponse } from ".";
 
-const _defaultParams: PrivacyListCardsParams = {};
+const _defaultParams: ListCardsParams = {};
 
 /**
- * List cards associated with the Privacy account
+ * List cards associated with the privacy account
  */
-export class PrivacyListCardsRequest extends PrivacyGetEndpoint<PrivacyListCardsResponse> {
+export class ListCardsRequest extends GetEndpoint {
     path: string = "/card";
-    params: PrivacyListCardsParams;
+    params: ListCardsParams;
 
-    constructor(params: PrivacyListCardsParams = _defaultParams) {
+    constructor(params: ListCardsParams = _defaultParams) {
         super();
         this.params = params;
     }
 }
 
 /**
- * Parameters for {@link PrivacyListCardsRequest}
+ * Parameters for {@link ListCardsRequest}
  * @defaultValue {}
  */
-export type PrivacyListCardsParams = {
+export type ListCardsParams = {
     /** For pagination. The default is one */
     page?: number;
     /** For pagination. The default value page size is 50 and the maximum is 1,000 */
@@ -33,4 +33,4 @@ export type PrivacyListCardsParams = {
     card_token?: string;
 };
 
-export type PrivacyListCardsResponse = PrivacyGetRequestPaginatedResponse<PrivacyCard>;
+export type ListCardsResponse = GetRequestPaginatedResponse<Card>;

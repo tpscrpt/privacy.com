@@ -1,4 +1,4 @@
-export type PrivacyEmbedRequest = {
+export type EmbedRequest = {
     /** Globally unique identifier for the card to be displayed */
     token: string;
     /** A publicly available URI, so the hosted white-labeled iframe can be styled with the client's branding */

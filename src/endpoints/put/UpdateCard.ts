@@ -1,24 +1,25 @@
-import { PrivacyCard } from "../../objects";
-import { PrivacyCardSpendLimitDuration, PrivacyCardState } from "../../objects/Card";
-import { PrivacyPutEndpoint } from ".";
+import { Response } from "..";
+import { Card } from "../../objects";
+import { CardSpendLimitDuration, CardState } from "../../objects/Card";
+import { PutEndpoint } from ".";
 
 /**
- * Update a card by its token for the Privacy account
+ * Update a card by its token for the privacy account
  */
-export class PrivacyUpdateCardRequest extends PrivacyPutEndpoint<PrivacyUpdateCardResponse> {
+export class UpdateCardRequest extends PutEndpoint {
     path: string = "/card";
-    params: PrivacyUpdateCardParams;
+    params: UpdateCardParams;
 
-    constructor(params: PrivacyUpdateCardParams) {
+    constructor(params: UpdateCardParams) {
         super();
         this.params = params;
     }
 }
 
 /**
- * Parameters for {@link PrivacyUpdateCardRequest}
+ * Parameters for {@link UpdateCardRequest}
  */
-export type PrivacyUpdateCardParams = {
+export type UpdateCardParams = {
     /** The unique token of the card to update */
     card_token: string;
     /** Friendly name to identify the card */
@@ -27,8 +28,8 @@ export type PrivacyUpdateCardParams = {
     funding_token?: string;
     /** Amount (in cents) to limit approved authorizations. Transaction requests above the spend limit will be declined */
     spend_limit?: number;
-    spend_limit_duration?: PrivacyCardSpendLimitDuration;
-    state?: PrivacyCardState;
+    spend_limit_duration?: CardSpendLimitDuration;
+    state?: CardState;
 };
 
-export type PrivacyUpdateCardResponse = PrivacyCard;
+export type UpdateCardResponse = Response<Card>;

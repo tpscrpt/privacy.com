@@ -1,6 +1,6 @@
-import { PrivacyEndpoint } from "../";
+import { Endpoint, Response } from "../";
 
-export abstract class PrivacyGetEndpoint<ResponseT> extends PrivacyEndpoint<ResponseT> {
+export abstract class GetEndpoint extends Endpoint {
     method: string = "GET";
     path: string;
     params: object;
@@ -9,15 +9,15 @@ export abstract class PrivacyGetEndpoint<ResponseT> extends PrivacyEndpoint<Resp
 /**
  * Generic response type for paginated endpoints
  * @remarks these are useful for endpoints which take "page, page_size" in their parameters
- *  - {@link PrivacyListCardsRequest}
- *  - {@link PrivacyListTransactionsRequest}
+ *  - {@link ListCardsRequest}
+ *  - {@link ListTransactionsRequest}
  */
-export type PrivacyGetRequestPaginatedResponse<PrivacyT> = {
-    data: PrivacyT[];
+export type GetRequestPaginatedResponse<T> = Response<{
+    data: T[];
     /** page number returned to the user */
     page: number;
     /** number of entries returned by the query */
     total_entries: number;
     /** number of pages given the pagination settings */
     total_pages: number;
-};
+}>;

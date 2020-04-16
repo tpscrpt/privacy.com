@@ -1,12 +1,12 @@
-import { PrivacyFundingAccount } from "./FundingAccount";
+import { FundingAccount } from "./FundingAccount";
 
-export type PrivacyCard = {
+export type Card = {
     /** An ISO 8601 timestamp for when the card was created */
     created: string;
     /** Three digit cvv printed on the back of the card */
     cvv: string;
-    /** See PrivacyFundingAccount */
-    funding: PrivacyFundingAccount;
+    /** See FundingAccount */
+    funding: FundingAccount;
     /** Two digit (MM) expiry month */
     exp_month: string;
     /** Four digit (YYYY) expiry year */
@@ -22,16 +22,16 @@ export type PrivacyCard = {
     /** Amount (in cents) to limit approved authorizations. Transaction requests above the spend limit will be declined. A card with no limit has this field set to 0 */
     spend_limit: number;
     /** TRANSACTION, MONTHLY, ANNUALLY, FOREVER */
-    spend_limit_duration: PrivacyCardSpendLimitDuration;
+    spend_limit_duration: CardSpendLimitDuration;
     /** OPEN, PAUSED, CLOSED */
-    state: PrivacyCardState;
+    state: CardState;
     /** Globally unique identifier */
     token: string;
     /** SINGLE_USE, MERCHANT_LOCKED, UNLOCKED */
-    type: PrivacyCardType;
+    type: CardType;
 };
 
-export type PrivacyCardType =
+export type CardType =
     /** Card will authorize at any merchant. Creating these cards requires additional privileges. */
     | "UNLOCKED"
     /** Card will close shortly after the first transaction */
@@ -40,14 +40,14 @@ export type PrivacyCardType =
     | "MERCHANT_LOCKED"
     /** Similar to unlocked, but a physical card */
     | "PHYSICAL";
-export type PrivacyCardState =
+export type CardState =
     /** Card will approve authorizations (if they match card and account parameters) */
     | "OPEN"
     /** Card will decline authorizations, but can be resumed at a later time */
     | "PAUSED"
     /** Card will no longer approve authorizations. Closing a card cannot be undone */
     | "CLOSED";
-export type PrivacyCardSpendLimitDuration =
+export type CardSpendLimitDuration =
     /** Card will authorizate multiple transactions if each individual transaction is under the spend limit */
     | "TRANSACTION"
     /** Card will authorize transactions up to spend limit for the trailing month. (Note month is calculated as this calendar date one month prior) */

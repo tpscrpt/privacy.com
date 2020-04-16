@@ -1,6 +1,6 @@
-import { PrivacyEvent } from "../../src/objects";
+import { Event } from "../../src/objects";
 
-export const privacyEvent: PrivacyEvent = {
+export const privacyEvent: Event = {
     amount: 0,
     created: "",
     result: "APPROVED",

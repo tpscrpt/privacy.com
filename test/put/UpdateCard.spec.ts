@@ -4,32 +4,26 @@ import { expect } from "chai";
 import { before } from "mocha";
 
 import {
-    PrivacyUpdateCardParams,
-    PrivacyUpdateCardRequest,
-    PrivacyUpdateCardResponse,
-} from "../../src/endpoints/put/UpdateCard";
-import { PrivacyCard } from "../../src/objects";
-import { privacyApiFixture } from "../fixtures/apiManager";
+    UpdateCardParams,
+    UpdateCardResponse,
+    Card
+} from "../../src";
+import { privacyApiFixture } from "../fixtures/privacyApi";
 import { privacyCardFixture } from "../fixtures/card";
 
 describe("UpdateCard basic", () => {
-    let response: PrivacyUpdateCardResponse;
+    let response: UpdateCardResponse;
 
     before("Execute Request", async () => {
-        const params: PrivacyUpdateCardParams = {
+        const params: UpdateCardParams = {
             card_token: privacyCardFixture.token,
             memo: "updated",
         };
-        const request = new PrivacyUpdateCardRequest(params);
-        try {
-            response = (await request.execute(privacyApiFixture)).data;
-        } catch (error) {
-            console.log(error);
-        }
+        response = await privacyApiFixture.updateCard(params)
     });
 
-    it("should return an appropriate response containing a valid PrivacyCard type object with changed memo", () => {
-        const cardData: PrivacyCard = response;
+    it("should return an appropriate response containing a valid Card type object with changed memo", () => {
+        const cardData: Card = response.data;
         Object.keys(privacyCardFixture).forEach((key) => expect(cardData[key]).to.exist);
         expect(cardData.memo).to.equal("updated");
     });

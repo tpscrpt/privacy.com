@@ -1,6 +1,6 @@
-import { PrivacyEndpoint } from "../";
+import { Endpoint } from "../";
 
-export abstract class PrivacyPutEndpoint<ResponseT> extends PrivacyEndpoint<ResponseT> {
+export abstract class PutEndpoint extends Endpoint {
     method: string = "PUT";
     path: string;
     params: object;

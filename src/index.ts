@@ -1,76 +1,80 @@
 import Axios from "axios";
 
-import { PrivacyEndpoint, PrivacyResponse } from "./endpoints";
-
-export { PrivacyListCardsRequest, PrivacyListCardsResponse, PrivacyListCardsParams } from "./endpoints/get/ListCards";
-export {
-    PrivacyListFundingAccountsRequest,
-    PrivacyListFundingAccountsResponse,
-    PrivacyListFundingAccountsParams,
+import { Endpoint, Response } from "./endpoints";
+import { HostedCardUiParams, HostedCardUiRequest, HostedCardUiResponse } from "./endpoints/get/HostedCardUi";
+import { ListCardsParams, ListCardsRequest, ListCardsResponse } from "./endpoints/get/ListCards";
+import {
+    ListFundingAccountsParams,
+    ListFundingAccountsRequest,
+    ListFundingAccountsResponse,
 } from "./endpoints/get/ListFundingAccounts";
-export {
-    PrivacyListTransactionsRequest,
-    PrivacyListTransactionsResponse,
-    PrivacyListTransactionsParams,
+import {
+    ListTransactionsParams,
+    ListTransactionsRequest,
+    ListTransactionsResponse,
 } from "./endpoints/get/ListTransactions";
-export {
-    PrivacyHostedCardUiRequest,
-    PrivacyHostedCardUiResponse,
-    PrivacyHostedCardUiParams,
-} from "./endpoints/get/HostedCardUi";
-
-export {
-    PrivacyCreateCardRequest,
-    PrivacyCreateCardResponse,
-    PrivacyCreateCardParams,
-} from "./endpoints/post/CreateCard";
-export { PrivacyAddBankRequest, PrivacyAddBankResponse, PrivacyAddBankParams } from "./endpoints/post/AddBank";
-
-export {
-    PrivacyUpdateCardRequest,
-    PrivacyUpdateCardResponse,
-    PrivacyUpdateCardParams,
-} from "./endpoints/put/UpdateCard";
-
-export {
-    PrivacySimulateAuthorizationRequest,
-    PrivacySimulateAuthorizationResponse,
-    PrivacySimulateAuthorizationParams,
+import { AddBankParams, AddBankRequest, AddBankResponse } from "./endpoints/post/AddBank";
+import { CreateCardParams, CreateCardRequest, CreateCardResponse } from "./endpoints/post/CreateCard";
+import {
+    SimulateAuthorizationParams,
+    SimulateAuthorizationRequest,
+    SimulateAuthorizationResponse,
 } from "./endpoints/post/simulations/Authorization";
-export {
-    PrivacySimulateVoidRequest,
-    PrivacySimulateVoidResponse,
-    PrivacySimulateVoidParams,
-} from "./endpoints/post/simulations/Void";
-export {
-    PrivacySimulateClearingRequest,
-    PrivacySimulateClearingResponse,
-    PrivacySimulateClearingParams,
+import {
+    SimulateClearingParams,
+    SimulateClearingRequest,
+    SimulateClearingResponse,
 } from "./endpoints/post/simulations/Clearing";
-export {
-    PrivacySimulateReturnRequest,
-    PrivacySimulateReturnResponse,
-    PrivacySimulateReturnParams,
+import {
+    SimulateReturnParams,
+    SimulateReturnRequest,
+    SimulateReturnResponse,
 } from "./endpoints/post/simulations/Return";
+import { SimulateVoidParams, SimulateVoidRequest, SimulateVoidResponse } from "./endpoints/post/simulations/Void";
+import { UpdateCardParams, UpdateCardRequest, UpdateCardResponse } from "./endpoints/put/UpdateCard";
+
+export { Card, EmbedRequest, Event, Merchant, FundingAccount, Transaction } from "./objects";
+
+export { TokenData } from "./endpoints/post";
 
 export {
-    PrivacyCard,
-    PrivacyEmbedRequest,
-    PrivacyEvent,
-    PrivacyMerchant,
-    PrivacyFundingAccount,
-    PrivacyTransaction,
-} from "./objects";
+    HostedCardUiResponse,
+    ListCardsResponse,
+    ListFundingAccountsResponse,
+    ListTransactionsResponse,
+    UpdateCardResponse,
+    CreateCardResponse,
+    AddBankResponse,
+    SimulateAuthorizationResponse,
+    SimulateVoidResponse,
+    SimulateClearingResponse,
+    SimulateReturnResponse,
+};
 
-class PrivacyApiManager {
+export {
+    HostedCardUiParams,
+    ListCardsParams,
+    ListFundingAccountsParams,
+    ListTransactionsParams,
+    UpdateCardParams,
+    CreateCardParams,
+    AddBankParams,
+    SimulateAuthorizationParams,
+    SimulateVoidParams,
+    SimulateClearingParams,
+    SimulateReturnParams,
+};
+
+class PrivacyApi {
     apiKey: string;
     sandbox: boolean;
     version: string;
     baseUrl: string;
+    headers: object;
 
     /**
      *
-     * @param apiKey Privacy API Key to use for requests
+     * @param apiKey  API Key to use for requests
      * @param sandbox Execute requests in sandbox mode or not @defaultValue true
      * @param version API version to use for requests @defaultValue "v1"
      */
@@ -79,17 +83,17 @@ class PrivacyApiManager {
         this.sandbox = sandbox;
         this.version = version;
         this.baseUrl = this.getBaseUrl();
+        this.headers = { Authorization: `api-key ${this.apiKey}` };
     }
 
-    public async execute(request: PrivacyEndpoint<any>): PrivacyResponse<any> {
+    public execute(request: Endpoint): Promise<Response<any>> {
         if (request.beforeExecute) request.beforeExecute(this);
 
         const requestUrl = `${this.baseUrl}${request.path}`;
         const method = request.method;
-        const apiKey = this.apiKey;
         const params = request.params;
         const headers = {
-            Authorization: `api-key ${apiKey}`,
+            ...this.headers,
         };
 
         switch (method) {
@@ -111,9 +115,104 @@ class PrivacyApiManager {
         }
     }
 
+    /**
+    * Create a new card for the privacy account
+    */
+    public createCard(params: CreateCardParams): Promise<CreateCardResponse> {
+        return this.execute(new CreateCardRequest(params));
+    }
+
+    /**
+     * Adds a bank account as a funding source using routing and account numbers. Returns a FundingAccount object containing the bank information.
+     */
+    public addBank(params: AddBankParams): Promise<AddBankResponse> {
+        return this.execute(new AddBankRequest(params));
+    }
+
+    /**
+     * List cards associated with the privacy account
+     */
+    public listCards(params?: ListCardsParams): Promise<ListCardsResponse> {
+        return this.execute(new ListCardsRequest(params));
+    }
+
+    /**
+     * List all the funding accounts associated with the privacy account
+     */
+    public listFundingAccounts(params?: ListFundingAccountsParams): Promise<ListFundingAccountsResponse> {
+        return this.execute(new ListFundingAccountsRequest(params));
+    }
+
+    /**
+    * List transactions associated with the privacy account or a specific card
+    */
+    public listTransactions(params?: ListTransactionsParams): Promise<ListTransactionsResponse> {
+        return this.execute(new ListTransactionsRequest(params));
+    }
+
+    /**
+     * Get iframe data to display card details
+     * @remarks The iframe body will provide consistent markup of the following form.
+     * It is up to the API client to provide css styles for these elements in the EmbedRequest.
+     * ```html
+     * <div id="card">
+     *   <div id="pan">{PAN}</div>
+     *   <div id="expiry">
+     *     <span id="month">{expMonth}</span>
+     *     <span id="separator">/</span>
+     *     <span id="year">{expYear}</span>
+     *   </div>
+     *   <div id="cvv">{CVV}</div>
+     * </div>
+     * ```
+     */
+    public hostedCardUi(params: HostedCardUiParams): Promise<HostedCardUiResponse> {
+        return this.execute(new HostedCardUiRequest(params));
+    }
+
+    /**
+     * Update a card by its token for the privacy account
+     */
+    public updateCard(params: UpdateCardParams): Promise<UpdateCardResponse> {
+        return this.execute(new UpdateCardRequest(params));
+    }
+
+    /**
+     * Simulates an authorization request from the payment network as if it came from a merchant acquirer.
+     * @remarks The API sends an event for all approvals. Decline events are available with API Issuing accounts and cannot be simulated.
+     * @link https://developer.privacy.com/docs#transaction-webhooks
+     */
+    public simulateAuthorization(params: SimulateAuthorizationParams): Promise<SimulateAuthorizationResponse> {
+        return this.execute(new SimulateAuthorizationRequest(params));
+    }
+
+    /**
+     * Voids an existing, uncleared (aka pending) authorization.
+     * @remarks Previous pending authorization is voided
+     */
+    public simulateVoid(params: SimulateVoidParams): Promise<SimulateVoidResponse> {
+        return this.execute(new SimulateVoidRequest(params));
+    }
+
+    /**
+     * Clears an existing authorization. After this event, the transaction is no longer pending.
+     * @remarks Clearing for an existing, pending authorization
+     */
+    public simulateClearing(params: SimulateClearingParams): Promise<SimulateClearingResponse> {
+        return this.execute(new SimulateClearingRequest(params));
+    }
+
+    /**
+     * Returns (aka refunds) an amount back to a card. Returns are cleared immediately and do not spend time in a "pending" state.
+     * @remarks Refund — value is pushed onto card
+     */
+    public simulateReturn(params: SimulateReturnParams): Promise<SimulateReturnResponse> {
+        return this.execute(new SimulateReturnRequest(params));
+    }
+
     private getBaseUrl(): string {
         return `https://${this.sandbox ? "sandbox" : "api"}.privacy.com/${this.version}`;
     }
 }
 
-export { PrivacyApiManager as PrivacyApi, PrivacyApiManager };
+export { PrivacyApi, PrivacyApi as default };

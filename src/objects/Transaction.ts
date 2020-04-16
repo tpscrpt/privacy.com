@@ -1,31 +1,31 @@
-import { PrivacyCard } from "./Card";
-import { PrivacyEvent } from "./Event";
-import { PrivacyMerchant } from "./Merchant";
+import { Card } from "./Card";
+import { Event } from "./Event";
+import { Merchant } from "./Merchant";
 
-export type PrivacyTransaction = {
+export type Transaction = {
     /** Authorization amount (in cents) of the transaction. This may change over time */
     amount: number;
-    /** See PrivacyCard */
-    card: PrivacyCard;
+    /** See Card */
+    card: Card;
     /** Date and time when the transaction first occurred */
     created: string;
     /** / A list of all events that have modified this transaction */
-    events: PrivacyEvent;
-    /** / See PrivacyPaymentFunding */
-    funding: PrivacyTransactionFunding;
-    /** See PrivacyMerchant */
-    merchant: PrivacyMerchant;
+    events: Event;
+    /** / See PaymentFunding */
+    funding: TransactionFunding;
+    /** See Merchant */
+    merchant: Merchant;
     /** APPROVED or decline reason. See below for full enumeration */
-    result: PrivacyTransactionResult;
+    result: TransactionResult;
     /** Amount (in cents) of the transaction that has been settled. This may change over time */
     settled_amount: number;
     /** PENDING, VOIDED, SETTLING, SETTLED, BOUNCED */
-    status: PrivacyTransactionStatus;
+    status: TransactionStatus;
     /** Globally unique identifier */
     token: string;
 };
 
-type PrivacyTransactionFunding = {
+type TransactionFunding = {
     /** amount represented in cents */
     amount: number;
     /** A reference to the funding account for the card that made this transaction may appear here and the token will match the token for the funding account in the card field */
@@ -34,7 +34,7 @@ type PrivacyTransactionFunding = {
     type: "PROMO" | "";
 };
 
-export type PrivacyTransactionStatus =
+export type TransactionStatus =
     /** Authorization is pending completion from the merchant */
     | "PENDING"
     /** The merchant has voided the previously pending authorization */
@@ -45,7 +45,7 @@ export type PrivacyTransactionStatus =
     | "SETTLED"
     /** There was an error settling the transaction against the funding source. Your API account may be disabled */
     | "BOUNCED";
-export type PrivacyTransactionResult =
+export type TransactionResult =
     /** Successful transaction; no reason to decline */
 
     | "APPROVED"

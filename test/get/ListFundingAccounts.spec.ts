@@ -3,26 +3,21 @@ import "mocha";
 import { expect } from "chai";
 import { before } from "mocha";
 
-import {
-    PrivacyListFundingAccountsRequest,
-    PrivacyListFundingAccountsResponse,
-} from "../../src/endpoints/get/ListFundingAccounts";
-import { PrivacyFundingAccount } from "../../src/objects";
-import { privacyApiFixture } from "../fixtures/apiManager";
+import { ListFundingAccountsResponse, FundingAccount } from "../../src";
+import { privacyApiFixture } from "../fixtures/privacyApi";
 import { privacyFundingAccount } from "../mocks/fundingAccount";
 
 describe("ListFundingAccounts basic", () => {
-    let response: PrivacyListFundingAccountsResponse;
+    let response: ListFundingAccountsResponse;
 
     before("Execute Request", async () => {
-        const request = new PrivacyListFundingAccountsRequest();
-        response = (await request.execute(privacyApiFixture)).data;
+        response = await privacyApiFixture.listFundingAccounts()
     });
 
-    it("should return an array of results with at least 1 member which matches PrivacyFundingAccount type", () => {
-        expect(response.length).to.be.at.least(1);
+    it("should return an array of results with at least 1 member which matches FundingAccount type", () => {
+        expect(response.data.length).to.be.at.least(1);
 
-        const fundingAccountData: PrivacyFundingAccount = response[0];
+        const fundingAccountData: FundingAccount = response.data[0];
         Object.keys(privacyFundingAccount).forEach((key) => expect(fundingAccountData[key]).to.exist);
     });
 });

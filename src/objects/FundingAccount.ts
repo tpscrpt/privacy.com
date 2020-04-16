@@ -1,7 +1,7 @@
-export type PrivacyFundingAccount = {
+export type FundingAccount = {
     /** Account name identifying the funding source. This may be null */
     account_name?: string;
-    /** An ISO 8601 string representing when this funding source was added to the Privacy account. This may be null */
+    /** An ISO 8601 string representing when this funding source was added to the  account. This may be null */
     created?: string;
     /** The last 4 digits of the account (e.g. bank account, debit card) associated with this FundingAccount. This may be null */
     last_four?: string;
@@ -9,7 +9,7 @@ export type PrivacyFundingAccount = {
     nickname?: string;
     /** State of funding source, see enumerations for list */
     state: FundingAccountState;
-    /** A globally unique identifier for this PrivacyFundingAccount */
+    /** A globally unique identifier for this FundingAccount */
     token: string;
     /** Type of funding source, see enumerations for list */
     type: FundingAccountType;

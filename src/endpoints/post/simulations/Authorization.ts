@@ -1,25 +1,26 @@
-import { PrivacyTokenResponse } from "..";
-import { PrivacyPostEndpoint } from "../";
+import { TokenData } from "..";
+import { PostEndpoint } from "../";
+import { Response } from "../..";
 
 /**
  * Simulates an authorization request from the payment network as if it came from a merchant acquirer.
  * @remarks The API sends an event for all approvals. Decline events are available with API Issuing accounts and cannot be simulated.
  * @link https://developer.privacy.com/docs#transaction-webhooks
  */
-export class PrivacySimulateAuthorizationRequest extends PrivacyPostEndpoint<PrivacySimulateAuthorizationResponse> {
+export class SimulateAuthorizationRequest extends PostEndpoint {
     path: string = "/simulate/authorize";
-    params: PrivacySimulateAuthorizationParams;
+    params: SimulateAuthorizationParams;
 
-    constructor(params: PrivacySimulateAuthorizationParams) {
+    constructor(params: SimulateAuthorizationParams) {
         super();
         this.params = params;
     }
 }
 
 /**
- * Parameters for {@link PrivacySimulateAuthorizationRequest}
+ * Parameters for {@link SimulateAuthorizationRequest}
  */
-export type PrivacySimulateAuthorizationParams = {
+export type SimulateAuthorizationParams = {
     /** Merchant descriptor */
     descriptor: string;
     /** 16 digit card number */
@@ -28,4 +29,4 @@ export type PrivacySimulateAuthorizationParams = {
     amount: number;
 };
 
-export type PrivacySimulateAuthorizationResponse = PrivacyTokenResponse;
+export type SimulateAuthorizationResponse = Response<TokenData>;

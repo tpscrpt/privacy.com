@@ -1,6 +1,6 @@
-import { PrivacyFundingAccount } from "../../src/objects";
+import { FundingAccount } from "../../src/objects";
 
-const privacyFundingAccount: PrivacyFundingAccount = {
+const privacyFundingAccount: FundingAccount = {
     account_name: "",
     created: "",
     last_four: "",

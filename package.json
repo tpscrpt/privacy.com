@@ -1,6 +1,6 @@
 {
     "name": "privacy.com",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "Wrapper for the Privacy.com API using Axios and TypeScript",
     "keywords": [
         "privacy.com",
@@ -8,7 +8,8 @@
         "typescript",
         "axios",
         "credit card",
-        "api"
+        "api",
+        "javascript"
     ],
     "scripts": {
         "build": "yarn clean && tsc",

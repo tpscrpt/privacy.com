@@ -1,7 +1,8 @@
-import { PrivacyApiManager } from "../..";
-import { PrivacyEmbedRequest } from "../../objects";
-import { createPrivacyHmac } from "../../utils";
-import { PrivacyGetEndpoint } from ".";
+import { Response } from "..";
+import { PrivacyApi } from "../..";
+import { EmbedRequest } from "../../objects";
+import { createHmac } from "../../utils";
+import { GetEndpoint } from ".";
 
 /**
  * Get iframe data to display card details
@@ -19,25 +20,25 @@ import { PrivacyGetEndpoint } from ".";
  * </div>
  * ```
  */
-export class PrivacyHostedCardUiRequest extends PrivacyGetEndpoint<PrivacyHostedCardUiResponse> {
+export class HostedCardUiRequest extends GetEndpoint {
     path: string = "/embed/card";
-    params: PrivacyHostedCardUiProxyParams;
-    originalParams: PrivacyHostedCardUiParams;
+    params: HostedCardUiProxyParams;
+    originalParams: HostedCardUiParams;
 
-    constructor(params: PrivacyHostedCardUiParams) {
+    constructor(params: HostedCardUiParams) {
         super();
         this.originalParams = params;
     }
 
     /**
      * Formats parameters for the request, i.e. creates an hmac with the API key and serializes the embed_request object
-     * @param manager PrivacyApiManager from which to extract the API Key
+     * @param manager PrivacyApi from which to extract the API Key
      */
-    public beforeExecute(manager: PrivacyApiManager): void {
+    public beforeExecute(manager: PrivacyApi): void {
         /**
          * @dev JSON must be encoded alphabetically, not too bad for not-deeply-nested objects like this one
          */
-        const data: PrivacyEmbedRequest = {
+        const data: EmbedRequest = {
             css: this.originalParams.embed_request.css,
             expiration: this.originalParams.embed_request.expiration,
             token: this.originalParams.embed_request.token,
@@ -45,26 +46,26 @@ export class PrivacyHostedCardUiRequest extends PrivacyGetEndpoint<PrivacyHosted
 
         this.params = {
             embed_request: Buffer.from(JSON.stringify(data)).toString("base64"),
-            hmac: createPrivacyHmac(manager.apiKey, data),
+            hmac: createHmac(manager.apiKey, data),
         };
     }
 }
 
 /**
- * Opaque parameters for {@link PrivacyHostedCardUiRequest}
+ * Opaque parameters for {@link HostedCardUiRequest}
  */
-export type PrivacyHostedCardUiParams = {
-    embed_request: PrivacyEmbedRequest;
+export type HostedCardUiParams = {
+    embed_request: EmbedRequest;
 };
 
 /**
- * Acutal parameters for {@link PrivacyHostedCardUiRequest}
+ * Acutal parameters for {@link HostedCardUiRequest}
  */
-type PrivacyHostedCardUiProxyParams = {
+type HostedCardUiProxyParams = {
     /** A base64 encoded JSON string of an EmbedRequest to specify which card to load */
     embed_request: string;
     /** SHA2 HMAC of the embed_request JSON string with base64 digest */
     hmac: string;
 };
 
-export type PrivacyHostedCardUiResponse = string;
+export type HostedCardUiResponse = Response<string>;
