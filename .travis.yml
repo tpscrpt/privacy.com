@@ -8,5 +8,4 @@ branches:
   only:
   - master
 
-script: yarn test:ci
-
+after_success: yarn coverage
