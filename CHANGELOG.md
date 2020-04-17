@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2020-04-17
+
+### Added
+
+-   LICENSE
+
 ## [1.1.0] - 2020-04-17
 
 ### Added
@@ -61,6 +67,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Initial release with all endpoints functional with accompanying tests, documentation.
 
-[unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.1.0...HEAD
-
-# [1.1.0]: https://github.com/jeremigendron/privacy.com/compare/v1.0.1...v1.1.0
+[unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/jeremigendron/privacy.com/compare/v1.1.0...v1.1.1
+[1.1.0]: https://github.com/jeremigendron/privacy.com/compare/v1.0.1...v1.1.0
