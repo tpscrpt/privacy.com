@@ -1,0 +1,11 @@
+language: node_js
+node_js: # use .nvmrc version
+
+os: linux
+dist: bionic
+
+branches:
+  only:
+  - master
+
+after_success: yarn coverage
