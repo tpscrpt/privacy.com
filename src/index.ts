@@ -215,4 +215,4 @@ class PrivacyApi {
     }
 }
 
-export { PrivacyApi, PrivacyApi as default };
+export { PrivacyApi };
