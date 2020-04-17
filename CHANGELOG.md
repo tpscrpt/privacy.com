@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - some yarn scripts for testing, coverage
 
-## Removed
+### Removed
 - default export for the PrivacyApi class
 
 ## [1.0.1] - 2020-04-16
