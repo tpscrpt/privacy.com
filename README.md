@@ -1,4 +1,5 @@
 [![Coverage Status](https://coveralls.io/repos/github/JeremiGendron/privacy.com/badge.svg?branch=develop)](https://coveralls.io/github/JeremiGendron/privacy.com?branch=develop)
+[![Build Status](https://travis-ci.com/JeremiGendron/privacy.com.svg?branch=develop)](https://travis-ci.com/JeremiGendron/privacy.com.svg?branch=develop)
 
 # Privacy.com API
 
