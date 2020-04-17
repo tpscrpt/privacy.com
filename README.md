@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/JeremiGendron/privacy.com/badge.svg?branch=develop)](https://coveralls.io/github/JeremiGendron/privacy.com?branch=develop)
+
 # Privacy.com API
 
 This library provides you with all you need to make proper calls to the Privacy.com API from a node environment. It is written in TypeScript and only has a dependency on Axios, so its usage is simple and straightforward.
