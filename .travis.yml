@@ -1,0 +1,12 @@
+language: node_js
+node_js: # use .nvmrc version
+
+os: linux
+dist: bionic
+
+branches:
+  only:
+  - master
+
+script: yarn test:ci
+
